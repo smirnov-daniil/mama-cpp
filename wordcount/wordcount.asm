@@ -28,24 +28,21 @@ _start:
 .count_loop:
                 mov             dl, byte [read_buf + rcx]
                 cmp             dl, 9
-                je              .white_space
-                cmp             dl, 10
-                je              .white_space
-                cmp             dl, 11
-                je              .white_space
-                cmp             dl, 12
-                je              .white_space
+                jb              .not_white_space
                 cmp             dl, 13
-                je              .white_space
+                ja              .check_space
+                jmp             .white_space
+.check_space:
                 cmp             dl, 32
-                test            bl, 1
-                jnz             .iterate
-                inc             r10
-                mov             bl, 1
-                jmp             .iterate
-
+                jne             .not_white_space
 .white_space:
                 xor             bl, bl
+                jmp             .iterate
+.not_white_space:
+                test            bl, 1
+                jnz             .iterate
+                mov             bl, 1
+                inc             r10
 .iterate:
                 inc             rcx
                 cmp             rcx, rax
