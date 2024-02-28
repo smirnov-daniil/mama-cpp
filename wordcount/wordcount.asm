@@ -26,18 +26,18 @@ _start:
                 xor             rcx, rcx
 
 .count_loop:
-                cmp             byte [read_buf + rcx], 9
+                mov             dl, byte [read_buf + rcx]
+                cmp             dl, 9
                 je              .white_space
-                cmp             byte [read_buf + rcx], 10
+                cmp             dl, 10
                 je              .white_space
-                cmp             byte [read_buf + rcx], 11
+                cmp             dl, 11
                 je              .white_space
-                cmp             byte [read_buf + rcx], 12
+                cmp             dl, 12
                 je              .white_space
-                cmp             byte [read_buf + rcx], 13
+                cmp             dl, 13
                 je              .white_space
-                cmp             byte [read_buf + rcx], 32
-                je              .white_space
+                cmp             dl, 32
                 test            bl, 1
                 jnz             .iterate
                 inc             r10
