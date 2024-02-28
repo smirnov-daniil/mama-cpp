@@ -33,7 +33,7 @@ _start:
                 ja              .check_space
                 jmp             .white_space
 .check_space:
-                cmp             dl, 32
+                xor             dl, 32
                 jne             .not_white_space
 .white_space:
                 xor             bl, bl
